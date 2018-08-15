@@ -1,0 +1,32 @@
+{
+  "name": "@sec-block/secjs-vmlite",
+  "version": "1.0.1",
+  "description": "SecVm Lite Version",
+  "main": "src/index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {
+    "coveralls": "^3.0.2",
+    "enc": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SEC-block/secjs-vmlite.git"
+  },
+  "keywords": [
+    "secjs",
+    "vm"
+  ],
+  "author": "Ming Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SEC-block/secjs-vmlite/issues"
+  },
+  "homepage": "https://github.com/SEC-block/secjs-vmlite#readme"
+}
