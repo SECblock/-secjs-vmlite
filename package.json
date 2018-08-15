@@ -8,8 +8,11 @@
     "test": "test"
   },
   "dependencies": {
+    "async-eventemitter": "^0.2.4",
     "coveralls": "^3.0.2",
-    "enc": "^0.4.0"
+    "enc": "^0.4.0",
+    "ethereum-common": "^0.2.1",
+    "ethereumjs-util": "^5.2.0"
   },
   "devDependencies": {},
   "scripts": {

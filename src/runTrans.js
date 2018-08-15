@@ -6,7 +6,7 @@ const ethUtil = require('ethereumjs-util')
 const BN = ethUtil.BN
 
 /**
- * Run a Call
+ * Execute a Transaction Message
  * @param {Buffer} opts.code The source code of smart contracts.
  * @param {Buffer} opts.data The input data -- invoked function name and input variables.
  * @param {Buffer} opts.value The amount to be transfered.
