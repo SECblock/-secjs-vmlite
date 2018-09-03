@@ -18,7 +18,7 @@ describe('secjs vmlite test', () => {
       data: Buffer.from(data, 'hex'),
       gasLimit: Buffer.from('ffffffff', 'hex')
     }, function (results) {
-      assert.strictEqual(results.vmResults.return.toString('hex'), '000000000000000000000000000000000000000000000000000000000000002a')
+      assert.strictEqual(results.Return.toString('hex'), '000000000000000000000000000000000000000000000000000000000000002a')
     })
   })
 })

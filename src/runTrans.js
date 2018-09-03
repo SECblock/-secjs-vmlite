@@ -9,8 +9,12 @@ const BN = ethUtil.BN
  * Execute a Transaction Message
  * @param {Buffer} opts.code The source code of smart contracts.
  * @param {Buffer} opts.data The input data -- invoked function name and input variables.
- * @param {Buffer} opts.value The amount to be transfered.
+ * @param {Buffer} opts.amount The amount to be transfered.
  * @param {Buffer} opts.gasLimit The gas limit.
+ * @param {Buffer} opts.gasPrice The gas price.
+ * @param {Buffer} opts.message The input message.
+ * @param {Buffer} opts.from The from Address.
+ * @param {Buffer} opts.to The to Address.
  * @param {Function} cb
  */
 
@@ -21,6 +25,7 @@ module.exports = function (opts, cb) {
   let txData = opts.data
   let txValue = opts.value || Buffer.from([0])
   let gasLimit = opts.gasLimit
+  let gasPrice = opts.gasPrice
   let runCodeOpts
 
   txValue = new BN(txValue)
@@ -34,7 +39,8 @@ module.exports = function (opts, cb) {
       code: scSrcCode,
       data: txData,
       value: txValue,
-      gasLimit: gasLimit
+      gasLimit: gasLimit,
+      gasPrice: gasPrice
     }
     self.runOper(runCodeOpts, function (err, results) {
       vmResults = results
@@ -50,7 +56,15 @@ module.exports = function (opts, cb) {
   function parseCallResult (err) {
     if (err) return cb(err)
     let results = {
-      vmResults: vmResults
+      TxFrom: opts.from.toString(),
+      TxTo: opts.to.toString(),
+      Value: opts.amount.toString(),
+      Return: vmResults.return.toString('hex'),
+      GasLimit: vmResults.gasLimit.toString(),
+      GasUsedByTxn: vmResults.gasUsed.toNumber().toString(),
+      GasPrice: vmResults.gasPrice.toString(),
+      TxFee: vmResults.txFee.toString(),
+      InputData: opts.message
     }
     cb(null, results)
   }

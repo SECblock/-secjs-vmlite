@@ -2,7 +2,7 @@
   "name": "@sec-block/secjs-vmlite",
   "version": "1.0.4",
   "description": "SecVm Lite Version",
-  "main": "src/index.js",
+  "main": "",
   "directories": {
     "example": "example",
     "test": "test"

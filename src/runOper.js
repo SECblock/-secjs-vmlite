@@ -18,6 +18,7 @@ const VmError = exceptions.VmError
  * @param {Buffer} opts.data The input data -- invoked function name and input variables.
  * @param {Buffer} opts.value The amount to be transfered.
  * @param {Buffer} opts.gasLimit The gas limit.
+ * @param {Buffer} opts.gasPrice The gas price.
  * @param {Function} cb
  */
 
@@ -35,6 +36,7 @@ module.exports = function (opts, cb) {
     gasLeft: new BN(opts.gasLimit),
     gasLimit: new BN(opts.gasLimit),
     gasPrice: opts.gasPrice,
+    message: opts.message,
     memory: [],
     memoryWordCount: new BN(0),
     stack: [],
@@ -106,7 +108,6 @@ module.exports = function (opts, cb) {
       }
 
       let fee = new BN(opInfo.fee)
-
       vmState.gasLeft = vmState.gasLeft.sub(fee)
       if (vmState.gasLeft.ltn(0)) {
         vmState.gasLeft = new BN(0)
@@ -176,11 +177,14 @@ module.exports = function (opts, cb) {
       vmState: vmState,
       selfdestruct: vmState.selfdestruct,
       gasRefund: vmState.gasRefund,
+      gasLimit: vmState.gasLimit,
+      gasPrice: vmState.gasPrice,
+      gasUsed: vmState.gasUsed,
+      gas: vmState.gasLeft,
       exception: err ? 0 : 1,
       exceptionError: err,
       logs: vmState.logs,
-      gas: vmState.gasLeft,
-      'return': vmState.returnValue ? vmState.returnValue : Buffer.alloc(0)
+      return: vmState.returnValue ? vmState.returnValue : Buffer.alloc(0)
     }
 
     if (results.exceptionError) {
@@ -193,6 +197,8 @@ module.exports = function (opts, cb) {
     } else {
       results.gasUsed = vmState.gasLimit.sub(vmState.gasLeft)
     }
+
+    results.txFee = results.gasUsed.toNumber() * vmState.gasPrice
 
     cb(err, results)
   }
