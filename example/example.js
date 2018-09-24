@@ -30,5 +30,7 @@ vm.runTrans({
   convertedString = unescape(convertedString)
   console.log(convertedString.replace(/0+$/g, ''))
   // console.log('gasUsed: ' + results.vmResults.gasUsed.toString())
-  console.log(err)
+  if (err) {
+    console.log(err)
+  }
 })

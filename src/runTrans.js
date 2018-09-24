@@ -44,7 +44,9 @@ module.exports = function (opts, cb) {
     }
     self.runOper(runCodeOpts, function (err, results) {
       vmResults = results
-      console.log(err)
+      if (err) {
+        return err
+      }
       return cb()
     })
   }
