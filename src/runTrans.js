@@ -73,7 +73,6 @@ module.exports = function (opts, cb) {
 
   async.series([
     beforeTrans,
-    runOper,
-    afterTrans
+    runOper
   ], parseCallResult)
 }
